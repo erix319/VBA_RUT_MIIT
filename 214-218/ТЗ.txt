@@ -1,0 +1,522 @@
+pinggu0zhi:
+решить на VBA:
+
+11.214. Фирме принадлежат два магазина. Известна стоимость товаров, проданных
+в каждом магазине за каждый день в июле и августе, которая хранится
+в двух массивах. Получить общую стоимость проданных фирмой товаров за
+два месяца.
+11.215. Известно количество мячей, забитых футбольной командой за каждую игру
+в двух чемпионатах, которое хранится в двух массивах. В каждом из чем-
+пионатов команда сыграла 26 игр. Найти общее количество мячей, забитых
+командой в двух чемпионатах.
+11.216. В области 20 районов. Площади, засеянные пшеницей (в гектарах), и уро-
+жай, собранный в каждом районе (в центнерах), хранятся в двух массивах.
+Определить среднюю урожайность пшеницы по каждому району и по об-
+ласти в целом.
+Задачу решить двумя способами:
+1) без использования дополнительного (третьего) массива;
+2) с использованием дополнительного массива.
+11.217. В области 10 районов. Заданы площади, засеваемые пшеницей (в гектарах),
+и средняя урожайность (в центнерах с гектара) в каждом районе. Опреде-
+лить количество пшеницы, собранное в области, и среднюю урожайность
+по области.
+Задачу решить двумя способами:
+1) без использования дополнительного (третьего) массива;
+2) с использованием дополнительного массива.
+11.218. Размеры 12 параллелепипедов (длина, ширина, высота) хранятся в трех
+массивах. Вывести на экран объемы каждой фигуры.
+Задачу решить двумя способами:
+1) без использования дополнительного (третьего) массива;
+2) с использованием дополнительного массива
+
+ChatGPT 5 | Gemini | Midjourney:
+Давайте решим каждую из задач по очереди с использованием VBA. 
+
+▎Задача 11.214: Общая стоимость проданных товаров
+
+Sub TotalSales()
+    Dim salesJuly() As Double
+    Dim salesAugust() As Double
+    Dim totalSales As Double
+    Dim i As Integer
+    
+    ' Пример данных
+    salesJuly = Array(100, 200, 150, 300) ' Замените на реальные данные
+    salesAugust = Array(250, 400, 350, 450) ' Замените на реальные данные
+    
+    ' Подсчет общей стоимости
+    For i = LBound(salesJuly) To UBound(salesJuly)
+        totalSales = totalSales + salesJuly(i)
+    Next i
+    
+    For i = LBound(salesAugust) To UBound(salesAugust)
+        totalSales = totalSales + salesAugust(i)
+    Next i
+    
+    MsgBox "Общая стоимость проданных товаров: " & totalSales
+End Sub
+
+
+▎Задача 11.215: Общее количество мячей
+
+Sub TotalGoals()
+    Dim goalsChampionship1() As Integer
+    Dim goalsChampionship2() As Integer
+    Dim totalGoals As Integer
+    Dim i As Integer
+    
+    ' Пример данных
+    goalsChampionship1 = Array(1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5, 0, 1, 2)
+    goalsChampionship2 = Array(2, 1, 3, 0, 4, 5, 1, 2, 3, 4, 0, 5, 1, 2, 3, 4, 0, 5, 1, 2, 3, 4, 5, 0, 1, 2)
+    
+    ' Подсчет общего количества мячей
+    For i = LBound(goalsChampionship1) To UBound(goalsChampionship1)
+        totalGoals = totalGoals + goalsChampionship1(i)
+    Next i
+    
+    For i = LBound(goalsChampionship2) To UBound(goalsChampionship2)
+        totalGoals = totalGoals + goalsChampionship2(i)
+    Next i
+    
+    MsgBox "Общее количество мячей: " & totalGoals
+End Sub
+
+
+▎Задача 11.216: Средняя урожайность пшеницы
+
+1) Без использования дополнительного массива:
+
+Sub AverageYieldWithoutArray()
+    Dim areas() As Double
+    Dim yields() As Double
+    Dim totalYield As Double
+    Dim totalArea As Double
+    Dim i As Integer
+    
+    ' Пример данных
+    areas = Array(10.5, 20.0, 15.5) ' Замените на реальные данные
+    yields = Array(30.0, 25.0, 20.0) ' Замените на реальные данные
+    
+    ' Подсчет общей урожайности и площади
+    For i = LBound(areas) To UBound(areas)
+        totalArea = totalArea + areas(i)
+        totalYield = totalYield + (areas(i) * yields(i))
+    Next i
+    
+    MsgBox "Средняя урожайность по области: " & (totalYield / totalArea)
+End Sub
+
+
+2) С использованием дополнительного массива:
+
+Sub AverageYieldWithArray()
+    Dim areas() As Double
+    Dim yields() As Double
+    Dim yieldsPerDistrict() As Double
+    Dim totalYield As Double
+    Dim totalArea As Double
+    Dim i As Integer
+    
+    ' Пример данных
+    areas = Array(10.5, 20.0, 15.5) ' Замените на реальные данные
+    yields = Array(30.0, 25.0, 20.0) ' Замените на реальные данные
+    
+    ReDim yieldsPerDistrict(LBound(areas) To UBound(areas))
+    
+    ' Подсчет урожайности по каждому району
+    For i = LBound(areas) To UBound(areas)
+        yieldsPerDistrict(i) = areas(i) * yields(i)
+        totalArea = totalArea + areas(i)
+        totalYield = totalYield + yieldsPerDistrict(i)
+    Next i
+    
+    MsgBox "Средняя урожайность по области: " & (totalYield / totalArea)
+End Sub
+
+
+▎Задача 11.217: Количество пшеницы и средняя урожайность
+
+1) Без использования дополнительного массива:
+
+Sub TotalWheatWithoutArray()
+    Dim areas() As Double
+    Dim averageYields() As Double
+    Dim totalWheat As Double
+    Dim totalArea As Double
+    Dim i As Integer
+    
+    ' Пример данных
+    areas = Array(10.5, 20.0, 15.5) ' Замените на реальные данные
+    averageYields = Array(30.0, 25.0, 20.0) ' Замените на реальные данные
+    
+    ' Подсчет общего количества пшеницы и средней урожайности
+    For i = LBound(areas) To UBound(areas)
+        totalWheat = totalWheat + (areas(i) * averageYields(i))
+        totalArea = totalArea + areas(i)
+    Next i
+    
+    MsgBox "Общее количество пшеницы: " & totalWheat & vbCrLf & _
+           "Средняя урожайность по области: " & (totalWheat / totalArea)
+End Sub
+
+
+2) С использованием дополнительного массива:
+
+Sub TotalWheatWithArray()
+    Dim areas() As Double
+
+    Dim averageYields() As Double
+    Dim wheatPerDistrict() As Double
+    Dim totalWheat As Double
+    Dim totalArea As Double
+    Dim i As Integer
+    
+    ' Пример данных
+    areas = Array(10.5, 20.0, 15.5) ' Замените на реальные данные
+    averageYields = Array(30.0, 25.0, 20.0) ' Замените на реальные данные
+    
+    ReDim wheatPerDistrict(LBound(areas) To UBound(areas))
+    
+    ' Подсчет урожайности по каждому району и общего количества пшеницы
+    For i = LBound(areas) To UBound(areas)
+        wheatPerDistrict(i) = areas(i) * averageYields(i)
+        totalWheat = totalWheat + wheatPerDistrict(i)
+        totalArea = totalArea + areas(i)
+    Next i
+    
+    MsgBox "Общее количество пшеницы: " & totalWheat & vbCrLf & _
+           "Средняя урожайность по области: " & (totalWheat / totalArea)
+End Sub
+
+
+▎Задача 11.218: Объемы параллелепедов
+
+1) Без использования дополнительного массива:
+
+Sub VolumeWithoutArray()
+    Dim lengths() As Double
+    Dim widths() As Double
+    Dim heights() As Double
+    Dim volume As Double
+    Dim i As Integer
+    
+    ' Пример данных
+    lengths = Array(2, 3, 4) ' Замените на реальные данные
+    widths = Array(3, 4, 5) ' Замените на реальные данные
+    heights = Array(4, 5, 6) ' Замените на реальные данные
+    
+    For i = LBound(lengths) To UBound(lengths)
+        volume = lengths(i) * widths(i) * heights(i)
+        MsgBox "Объем параллелепипеда " & (i + 1) & ": " & volume
+    Next i
+End Sub
+
+
+2) С использованием дополнительного массива:
+
+Sub VolumeWithArray()
+    Dim lengths() As Double
+    Dim widths() As Double
+    Dim heights() As Double
+    Dim volumes() As Double
+    Dim i As Integer
+    
+    ' Пример данных
+    lengths = Array(2, 3, 4) ' Замените на реальные данные
+    widths = Array(3, 4, 5) ' Замените на реальные данные
+    heights = Array(4, 5, 6) ' Замените на реальные данные
+    
+    ReDim volumes(LBound(lengths) To UBound(lengths))
+    
+    For i = LBound(lengths) To UBound(lengths)
+        volumes(i) = lengths(i) * widths(i) * heights(i)
+        MsgBox "Объем параллелепипеда " & (i + 1) & ": " & volumes(i)
+    Next i
+End Sub
+
+
+Эти примеры кода можно использовать в редакторе VBA в Excel или других приложениях Office для выполнения соответствующих расчетов. Не забудьте заменить примерные данные на свои собственные!
+
+pinggu0zhi:
+данные должны быть введены с клавиатуры
+
+ChatGPT 5 | Gemini | Midjourney:
+Конечно! Давайте изменим код, чтобы данные вводились с клавиатуры. Мы будем использовать функцию InputBox для получения данных от пользователя.
+
+▎Задача 11.214: Общая стоимость проданных товаров
+
+Sub TotalSales()
+    Dim salesJuly() As Double
+    Dim salesAugust() As Double
+    Dim totalSales As Double
+    Dim i As Integer
+    Dim numItems As Integer
+    
+    ' Ввод количества товаров
+    numItems = InputBox("Введите количество товаров:")
+    
+    ReDim salesJuly(1 To numItems)
+    ReDim salesAugust(1 To numItems)
+    
+    ' Ввод данных за июль
+    For i = 1 To numItems
+        salesJuly(i) = InputBox("Введите стоимость товара " & i & " за июль:")
+    Next i
+    
+    ' Ввод данных за август
+    For i = 1 To numItems
+        salesAugust(i) = InputBox("Введите стоимость товара " & i & " за август:")
+    Next i
+    
+    ' Подсчет общей стоимости
+    For i = 1 To numItems
+        totalSales = totalSales + salesJuly(i) + salesAugust(i)
+    Next i
+    
+    MsgBox "Общая стоимость проданных товаров: " & totalSales
+End Sub
+
+
+▎Задача 11.215: Общее количество мячей
+
+Sub TotalGoals()
+    Dim goalsChampionship1() As Integer
+    Dim goalsChampionship2() As Integer
+    Dim totalGoals As Integer
+    Dim i As Integer
+    Dim numMatches As Integer
+    
+    ' Ввод количества матчей
+    numMatches = InputBox("Введите количество матчей:")
+    
+    ReDim goalsChampionship1(1 To numMatches)
+    ReDim goalsChampionship2(1 To numMatches)
+    
+    ' Ввод данных для первого чемпионата
+    For i = 1 To numMatches
+        goalsChampionship1(i) = InputBox("Введите количество голов в матче " & i & " первого чемпионата:")
+    Next i
+    
+    ' Ввод данных для второго чемпионата
+    For i = 1 To numMatches
+        goalsChampionship2(i) = InputBox("Введите количество голов в матче " & i & " второго чемпионата:")
+    Next i
+    
+    ' Подсчет общего количества мячей
+    For i = 1 To numMatches
+        totalGoals = totalGoals + goalsChampionship1(i) + goalsChampionship2(i)
+    Next i
+    
+    MsgBox "Общее количество мячей: " & totalGoals
+End Sub
+
+
+▎Задача 11.216: Средняя урожайность пшеницы
+
+1) Без использования дополнительного массива:
+
+Sub AverageYieldWithoutArray()
+    Dim areas() As Double
+    Dim yields() As Double
+    Dim totalYield As Double
+    Dim totalArea As Double
+    Dim i As Integer
+    Dim numDistricts As Integer
+    
+    ' Ввод количества районов
+    numDistricts = InputBox("Введите количество районов:")
+    
+    ReDim areas(1 To numDistricts)
+    ReDim yields(1 To numDistricts)
+    
+    ' Ввод данных по районам
+    For i = 1 To numDistricts
+        areas(i) = InputBox("Введите площадь района " & i & ":")
+        yields(i) = InputBox("Введите среднюю урожайность в районе " & i & ":")
+    Next i
+    
+    ' Подсчет общей урожайности и площади
+    For i = 1 To numDistricts
+        totalArea = totalArea + areas(i)
+        totalYield = totalYield + (areas(i) * yields(i))
+    Next i
+    
+    MsgBox "Средняя урожайность по области: " & (totalYield / totalArea)
+End Sub
+
+
+2) С использованием дополнительного массива:
+
+Sub AverageYieldWithArray()
+    Dim areas() As Double
+    Dim yields() As Double
+    Dim yieldsPerDistrict() As Double
+    Dim totalYield As Double
+    Dim totalArea As Double
+    Dim i As Integer
+    Dim numDistricts As Integer
+    
+    ' Ввод количества районов
+    numDistricts = InputBox("Введите количество районов:")
+    
+    ReDim areas(1 To numDistricts)
+    ReDim yields(1 To numDistricts)
+    
+    ' Ввод данных по районам
+    For i = 1 To numDistricts
+        areas(i) = InputBox("Введите площадь района " & i & ":")
+        yields(i) = InputBox("Введите среднюю урожайность в районе " & i & ":")
+    Next i
+    
+    ReDim yieldsPerDistrict(1 To numDistricts)
+    
+    ' Подсчет урожайности по каждому району
+    For i = 1 To numDistricts
+        yieldsPerDistrict(i) = areas(i) * yields(i)
+        totalArea = totalArea + areas(i)
+        totalYield = totalYield + yieldsPerDistrict(i)
+    Next i
+    
+    MsgBox "Средняя урожайность по области: " & (totalYield / totalArea)
+
+End Sub
+
+
+▎Задача 11.217: Количество пшеницы и средняя урожайность
+
+1) Без использования дополнительного массива:
+
+Sub TotalWheatWithoutArray()
+    Dim areas() As Double
+    Dim averageYields() As Double
+    Dim totalWheat As Double
+    Dim totalArea As Double
+    Dim i As Integer
+    Dim numDistricts As Integer
+    
+    ' Ввод количества районов
+    numDistricts = InputBox("Введите количество районов:")
+    
+    ReDim areas(1 To numDistricts)
+    ReDim averageYields(1 To numDistricts)
+    
+    ' Ввод данных по районам
+    For i = 1 To numDistricts
+        areas(i) = InputBox("Введите площадь района " & i & ":")
+        averageYields(i) = InputBox("Введите среднюю урожайность в районе " & i & ":")
+    Next i
+    
+    ' Подсчет общего количества пшеницы и средней урожайности
+    For i = 1 To numDistricts
+        totalWheat = totalWheat + (areas(i) * averageYields(i))
+        totalArea = totalArea + areas(i)
+    Next i
+    
+    MsgBox "Общее количество пшеницы: " & totalWheat & vbCrLf & _
+           "Средняя урожайность по области: " & (totalWheat / totalArea)
+End Sub
+
+
+2) С использованием дополнительного массива:
+
+Sub TotalWheatWithArray()
+    Dim areas() As Double
+    Dim averageYields() As Double
+    Dim wheatPerDistrict() As Double
+    Dim totalWheat As Double
+    Dim totalArea As Double
+    Dim i As Integer
+    Dim numDistricts As Integer
+    
+    ' Ввод количества районов
+    numDistricts = InputBox("Введите количество районов:")
+    
+    ReDim areas(1 To numDistricts)
+    ReDim averageYields(1 To numDistricts)
+    
+    ' Ввод данных по районам
+    For i = 1 To numDistricts
+        areas(i) = InputBox("Введите площадь района " & i & ":")
+        averageYields(i) = InputBox("Введите среднюю урожайность в районе " & i & ":")
+    Next i
+    
+    ReDim wheatPerDistrict(1 To numDistricts)
+    
+    ' Подсчет урожайности по каждому району и общего количества пшеницы
+    For i = 1 To numDistricts
+        wheatPerDistrict(i) = areas(i) * averageYields(i)
+        totalWheat = totalWheat + wheatPerDistrict(i)
+        totalArea = totalArea + areas(i)
+    Next i
+    
+    MsgBox "Общее количество пшеницы: " & totalWheat & vbCrLf & _
+           "Средняя урожайность по области: " & (totalWheat / totalArea)
+End Sub
+
+
+▎Задача 11.218: Объемы параллелепедов
+
+1) Без использования дополнительного массива:
+
+Sub VolumeWithoutArray()
+    Dim lengths() As Double
+    Dim widths() As Double
+    Dim heights() As Double
+    Dim volume As Double
+    Dim i As Integer
+    Dim numParallelepipeds As Integer
+    
+    ' Ввод количества параллелепедов
+    numParallelepipeds = InputBox("Введите количество параллелепедов:")
+    
+    ReDim lengths(1 To numParallelepipeds)
+    ReDim widths(1 To numParallelepipeds)
+    ReDim heights(1 To numParallelepipeds)
+    
+    ' Ввод данных для параллелепедов
+    For i = 1 To numParallelepipeds
+        lengths(i) = InputBox("Введите длину параллелепипеда " & i & ":")
+        widths(i) = InputBox("Введите ширину параллелепипеда " & i & ":")
+        heights(i) = InputBox("Введите высоту параллелепипеда " & i & ":")
+        
+        volume = lengths(i) * widths(i) * heights(i)
+        MsgBox "Объем параллелепипеда " & i & ": " & volume
+    Next i
+End Sub
+
+
+2) С использованием дополнительного массива:
+
+Sub VolumeWithArray()
+    Dim lengths() As Double
+    Dim widths() As Double
+    Dim heights() As Double
+    Dim volumes() As Double
+    Dim i As Integer
+    Dim numParallelepipeds As Integer
+    
+    ' Ввод количества параллелепедов
+    numParallelepipeds = InputBox("Введите количество параллелепедов:")
+    
+    ReDim lengths(1 To numParallelepipeds)
+    ReDim widths(1 To numParallelepipeds)
+    ReDim heights(1 To numParallelepipeds)
+    
+   ' Ввод данных для параллелепедов 
+   For i = 1 To numParallelepipeds 
+       lengths(i) = InputBox("Введите длину параллелепипеда " & i & ":") 
+       widths(i) = InputBox("Введите ширину параллелепипеда " & i & ":") 
+       heights(i) = InputBox("Введите высоту параллелепипеда " & i & ":") 
+   Next i
+
+   ReDim volumes(1 To numParallelepipeds)
+
+   ' Подсчет объемов параллелепипедов 
+   For i = 1 To numParallelepipeds 
+       volumes(i) = lengths(i) * widths(i) * heights(i) 
+       MsgBox "Объем параллелепипеда " & i & ": " & volumes(i) 
+   Next i 
+End Sub 
+
+
+Теперь все примеры кода позволяют пользователю вводить данные с клавиатуры. Вы можете использовать эти макросы в редакторе VBA в Excel или других приложениях Office.
